@@ -8,7 +8,7 @@ RUN npm run build --configuration=production
 
 # Stage 2: Serve
 FROM nginx:alpine
-# Copy build files to Nginx - check your dist subfolder name!
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+# Using a wildcard to catch whatever folder name Angular generated
+COPY --from=build /app/dist/ /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
